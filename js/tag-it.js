@@ -106,7 +106,13 @@
             tagSource: null
             // Do not use the above deprecated options.
         },
-
+        //To position autocomplete element next to modal window
+        _position: function(){
+            //console.log(this.element.next('ul').offset());
+            var distance = parseInt(this.element.next('ul').offset().top);
+            var height = parseInt(this.element.next('ul').height());
+            jQuery('.ui-autocomplete').css('top', (distance+height)+'px');
+        },
         _create: function() {
             // for handling static scoping inside callbacks
             var that = this;
@@ -148,6 +154,7 @@
                         choices = this._subtractArray(choices, this.assignedTags());
                     }
                     showChoices(choices);
+                    this._position();
                 };
             }
 
